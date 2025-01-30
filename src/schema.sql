@@ -71,7 +71,7 @@ CREATE TABLE staff (
     last_name TEXT NOT NULL,
     email TEXT,
     phone_number TEXT,
-    position TEXT CHECK(position IN ('Trainer', 'Manager', 'Receptionist')),
+    position TEXT CHECK(position IN ('Manager', 'Trainer', 'Receptionist','Maintenance')),
     hire_date DATE,
     location_id INTEGER,
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
@@ -80,7 +80,7 @@ CREATE TABLE staff (
 CREATE TABLE equipment (
     equipment_id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    type TEXT CHECK(type IN ('Cardio', 'Strength')),
+    type TEXT,
     purchase_date DATE,
     last_maintenance_date DATE,
     next_maintenance_date DATE,
@@ -114,7 +114,7 @@ CREATE TABLE memberships (
     type TEXT,
     start_date DATE,
     end_date DATE,
-    status TEXT CHECK(status IN ('Active', 'Inactive')),
+    status TEXT,
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
 
@@ -132,7 +132,7 @@ CREATE TABLE class_attendance (
     class_attendance_id INTEGER PRIMARY KEY,
     schedule_id INTEGER,
     member_id INTEGER,
-    attendance_status TEXT CHECK(attendance_status IN ('Registered', 'Attended', 'Unattended')),
+    attendance_status TEXT,
     FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
@@ -142,8 +142,8 @@ CREATE TABLE payments (
     member_id INTEGER,
     amount REAL,
     payment_date DATE,
-    payment_method TEXT CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal')),
-    payment_type TEXT CHECK(payment_type IN ('Monthly membership fee', 'Day pass')),
+    payment_method TEXT ,
+    payment_type TEXT,
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
 
@@ -179,6 +179,7 @@ CREATE TABLE equipment_maintenance_log (
     FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
+
 
 -- After creating the tables, you can import the sample data using:
 -- `.read data/sample_data.sql` in a sql file or `npm run import` in the terminal
