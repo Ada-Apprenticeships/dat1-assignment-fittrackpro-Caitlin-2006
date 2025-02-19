@@ -89,6 +89,9 @@ CREATE TABLE staff (
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
 
+/*INSERT INTO staff (first_name, last_name, email, phone_number, position, hire_date, location_id)
+VALUES ('Jake', 'Smith', jakesmith@google.com,'234-3456', 'Manager', '23-01-01', 1);*/
+
 CREATE TABLE equipment (
     equipment_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100) NOT NULL CHECK(length(name) > 1),
@@ -116,6 +119,10 @@ CREATE TABLE classes (
 /*INSERT INTO classes (name, description, capacity, duration, location_id)
 VALUES ('Negative Capacity Class', 'This class has negative capacity', -10, 60, 1);*/
 
+/*INSERT INTO classes (name, description, capacity, duration, location_id)
+VALUES ('C', 'D', 1, 30, 1);*/
+
+
 CREATE TABLE class_schedule (
     schedule_id INTEGER PRIMARY KEY AUTOINCREMENT,
     class_id INTEGER,
@@ -128,6 +135,9 @@ CREATE TABLE class_schedule (
 
 /*INSERT INTO class_schedule (class_id, staff_id, start_time, end_time)
 VALUES (1, 1, '2023-01-01 20:00:00', '2023-01-01 19:00:00');*/
+
+/*INSERT INTO class_schedule (class_id, staff_id, start_time, end_time)
+VALUES (1, 1, '2023-05-15 09:00:00', '2023-05-15 09:00:00'); */
 
 CREATE TABLE memberships (
     membership_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -163,6 +173,9 @@ CREATE TABLE class_attendance (
     FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
+
+/*INSERT INTO class_attendance (schedule_id, member_id, attendance_status)
+VALUES (1, 1, 'Registered');*/
 
 CREATE TABLE payments (
     payment_id INTEGER PRIMARY KEY AUTOINCREMENT,
